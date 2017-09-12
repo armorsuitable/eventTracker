@@ -21,14 +21,14 @@ class Logger
      */
     protected $fileInfo;
 
-	/**
-	 * 附加日志路径作为初始化参数的 SplFileInfo 对象
-	 * @param SplFileInfo $fileInfo
-	 */
-	public function __construct(SplFileInfo $fileInfo)
-	{
-		$this->fileInfo = $fileInfo;
-	}
+    /**
+     * 附加日志路径作为初始化参数的 SplFileInfo 对象
+     * @param SplFileInfo $fileInfo
+     */
+    public function __construct(SplFileInfo $fileInfo)
+    {
+        $this->fileInfo = $fileInfo;
+    }
 
 
     /**
@@ -36,45 +36,45 @@ class Logger
      * @return int
      */
     public function write($data)
-	{
-		$logRecordPrefix = $this->getLogLabelTime();
-		$logRecordType = ConfigReader::read('logs.log_type');
+    {
+        $logRecordPrefix = $this->getLogLabelTime();
+        $logRecordType = ConfigReader::read('logs.log_type');
 
-		$storeLine = $logRecordPrefix ." :[{$logRecordType}]: ". $data . "\n";
+        $storeLine = $logRecordPrefix ." :[{$logRecordType}]: ". $data . "\n";
 
-		if(! $this->fileExists()){
-			file_put_contents($this->fileInfo->getPathname(), $storeLine);
-		}
+        if(! $this->fileExists()){
+            file_put_contents($this->fileInfo->getPathname(), $storeLine);
+        }
 
-		if(! $this->isWriteAble()) {
-			throw new \RuntimeException($this->fileInfo->getPathname(). "is not writeable!");
-		}
+        if(! $this->isWriteAble()) {
+            throw new \RuntimeException($this->fileInfo->getPathname(). "is not writeable!");
+        }
 
-		$this->fileObject = $this->fileInfo->openFile('a');
-		return $this->fileObject->fwrite($storeLine);
-	}
+        $this->fileObject = $this->fileInfo->openFile('a');
+        return $this->fileObject->fwrite($storeLine);
+    }
 
     /**
      * @return mixed
      */
     protected function fileExists()
     {
-		return $this->fileInfo->isFile();
-	}
+        return $this->fileInfo->isFile();
+    }
 
     /**
      * @return bool
      */
     protected function isWriteAble()
     {
-		return $this->fileInfo->isWritable();
-	}
+        return $this->fileInfo->isWritable();
+    }
 
     /**
      * @return string
      */
     protected function getLogLabelTime()
-	{
-		return (new DateTime("NOW"))->format("Y-m-d H:i:s");
-	}
+    {
+        return (new DateTime("NOW"))->format("Y-m-d H:i:s");
+    }
 }
