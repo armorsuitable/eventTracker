@@ -19,19 +19,19 @@ class ConfigReader
      * @return bool|mixed
      */
     public static function parser($parserPath)
-	{
-	    if(!file_exists($parserPath)){
-	        return false;
+    {
+        if(!file_exists($parserPath)){
+            return false;
         }
 
-		self::$configMap = require $parserPath;
+        self::$configMap = require $parserPath;
 
-		if(empty(self::$configMap)){
-			return false;
-		}
+        if(empty(self::$configMap)){
+            return false;
+        }
 
-		return self::$configMap;
-	}
+        return self::$configMap;
+    }
 
     /**
      * @param $key
@@ -39,33 +39,33 @@ class ConfigReader
      * @return bool|mixed|null
      */
     public static function read($key, $options = [])
-	{
-		if(empty(self::$configMap) || !$key){
-			return false;
-		}
+    {
+        if (empty(self::$configMap) || !$key) {
+            return false;
+        }
 
-		if(!empty($options) && isset($options['env'])){
+        if (!empty($options) && isset($options['env'])) {
             return self::env($key);
         }
 
-        if(mb_strpos($key, '.') !== 0){
-		    $groupConfig = explode('.', $key);
+        if (mb_strpos($key, '.') !== 0) {
+            $groupConfig = explode('.', $key);
 
             $readMap = self::$configMap[$groupConfig[0]];
 
-            if(!is_array($readMap)){
+            if (!is_array($readMap)) {
                 return $readMap;
             }
 
-            foreach($readMap as $configName => $configValue){
-                if($groupConfig[1] === $configName){
+            foreach ($readMap as $configName => $configValue) {
+                if ($groupConfig[1] === $configName) {
                     return $configValue;
                 }
             }
         }
 
         return self::$configMap[$key];
-	}
+    }
 
     /**
      * @param $configKey
@@ -108,8 +108,4 @@ class ConfigReader
 
         return null;
     }
-
-	public static function put($setKey, $value, $options = [])
-	{
-	}
 }
