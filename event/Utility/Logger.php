@@ -3,14 +3,23 @@
 namespace Event\Utility;
 
 use SplFileInfo;
-use SplFileObject;
 use DateTime;
 
+/**
+ * Class Logger
+ * @package Event\Utility
+ */
 class Logger
 {
-	protected $fileObject;
+    /**
+     * @var
+     */
+    protected $fileObject;
 
-	protected $fileInfo;
+    /**
+     * @var SplFileInfo
+     */
+    protected $fileInfo;
 
 	/**
 	 * 附加日志路径作为初始化参数的 SplFileInfo 对象
@@ -21,35 +30,51 @@ class Logger
 		$this->fileInfo = $fileInfo;
 	}
 
-	public function write($data)
+
+    /**
+     * @param $data
+     * @return int
+     */
+    public function write($data)
 	{
 		$logRecordPrefix = $this->getLogLabelTime();
+		$logRecordType = ConfigReader::read('logs.log_type');
+
+		$storeLine = $logRecordPrefix ." :[{$logRecordType}]: ". $data . "\n";
 
 		if(! $this->fileExists()){
-			//file_put_contents()
+			file_put_contents($this->fileInfo->getPathname(), $storeLine);
 		}
 
 		if(! $this->isWriteAble()) {
-
+			throw new \RuntimeException($this->fileInfo->getPathname(). "is not writeable!");
 		}
 
 		$this->fileObject = $this->fileInfo->openFile('a');
-		$this->fileObject->fwrite($logRecordPrefix . ' : [ log-type ] ' .$data . "\n");
+		return $this->fileObject->fwrite($storeLine);
 	}
 
-	protected function fileExists()
-	{
+    /**
+     * @return mixed
+     */
+    protected function fileExists()
+    {
 		return $this->fileInfo->isFile();
 	}
 
-	protected function isWriteAble()
-	{
+    /**
+     * @return bool
+     */
+    protected function isWriteAble()
+    {
 		return $this->fileInfo->isWritable();
 	}
 
-	protected function getLogLabelTime()
+    /**
+     * @return string
+     */
+    protected function getLogLabelTime()
 	{
-		$dateTimeObject = new DateTime("NOW");
-		return $dateTimeObject->format("Y-m-d H:i:s");
+		return (new DateTime("NOW"))->format("Y-m-d H:i:s");
 	}
 }
