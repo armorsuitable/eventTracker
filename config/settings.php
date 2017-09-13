@@ -23,4 +23,10 @@ return [
         //   all , month ,  daily',
 		'interval'  =>  Event\Utility\ConfigReader::env('LOG_INTERVAL'),
 	],
+
+    'data' => [
+        'stream_name' => 'stream',
+        'id_upstream'  => 1000,
+        'id_downstream' => 9999
+    ],
 ];

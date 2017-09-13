@@ -2,8 +2,10 @@
 
 namespace Event\Utility;
 
-use SplFileInfo;
-use DateTime;
+/**
+ *  requirement php7 +
+ */
+use SplFileInfo, DateTime;
 
 /**
  * Class Logger
@@ -47,7 +49,7 @@ class Logger
         }
 
         if(! $this->isWriteAble()) {
-            throw new \RuntimeException($this->fileInfo->getPathname(). "is not writeable!");
+            throw new \RuntimeException($this->fileInfo->getPathname(). "is not writable!");
         }
 
         $this->fileObject = $this->fileInfo->openFile('a');

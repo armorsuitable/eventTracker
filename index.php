@@ -16,7 +16,6 @@ $logName = $settings['logs']['name_prefix'] .'-'. date('Y-m-d') . '.log';
 $absoluteFileName = $settings['logs']['absolute_dir'] . DIRECTORY_SEPARATOR . $logName;
 
 
-$a = new \Event\EventData();
 $b = new \EventTracker\EventCreateTracker();
 $c = new \Event\Utility\MessageGenerator();
 
@@ -32,3 +31,10 @@ $fileInfo = new SplFileInfo($absoluteFileName);
 $s = new \Event\Utility\Logger($fileInfo);
 $s->write("jjslksjdfsf |");
 
+
+$eventDt = new Event\EventData(['user_name'=>'AngFuLin', 'order_id'=>'013034033445', 'min'=>93]);
+//echo $eventDt;
+
+$event = new \Event\Event($eventDt,'tracker','create');
+
+echo $event;
