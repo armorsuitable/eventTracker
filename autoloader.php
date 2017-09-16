@@ -45,7 +45,7 @@ spl_autoload_register(function ($className){
 	if (!is_null($requireFile) && file_exists($requireFile)) {
 		require_once $requireFile;
 	}else{
-		throw new \Event\Exceptions\EventException(100);
+		throw new \Event\Exceptions\EventException("Not in autoload scope ...", 100);
 	}
 	// not in scope , ignore ...
 });

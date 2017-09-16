@@ -29,4 +29,10 @@ return [
         'id_upstream'  => 1000,
         'id_downstream' => 9999
     ],
+
+    'event' => [
+        'trackers' => Event\Utility\EventTrackerControl::class,
+
+        'debug' => Event\Utility\ConfigReader::env('TRACKER_DEBUG')
+    ],
 ];
