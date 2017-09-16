@@ -1,4 +1,4 @@
-/logs/*.log
+logs/*.log
 /.phpintel
 /.idea
 /.vendor
