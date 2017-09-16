@@ -1,7 +1,7 @@
 <?php  
 
 /**
- * base directory definition, must be needed 
+ * base directory definition, must be needed
  */
 define('APP_PATH', __DIR__ );
 
