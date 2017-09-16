@@ -12,6 +12,6 @@ class EventTerminateTracker extends EventGeneralTracker
 {
     public function capture(Event $event)
     {
-        var_dump("TerminateTracker .". $event->data);
+
     }
 }
