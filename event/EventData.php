@@ -25,7 +25,7 @@ class EventData
     public function __get($fetchKey)
     {
         if(!$fetchKey == ConfigReader::read('data.stream_name')){
-            throw new EventException("get attribute {$fetchKey} was not defined");
+            throw new EventException("get attribute {$fetchKey} was not defined",100);
         }
 
         if(isset($this->dataStream[$fetchKey])) {
