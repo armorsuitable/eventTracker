@@ -8,7 +8,11 @@
 
 namespace Event\Utility;
 
-use EventTracker\{EventTerminateTracker, EventNotificationTracker, EventDatabaseTracker};
+use EventTracker\{
+    EventTerminateTracker,
+    EventNotificationTracker,
+    EventDatabaseTracker
+};
 
 class EventTrackerControl
 {
