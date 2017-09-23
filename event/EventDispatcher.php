@@ -42,7 +42,8 @@ class EventDispatcher
             throw new EventException("event.debug.mode: {$debugMode} could not allowed !",200);
         }
 
-        $this->eventDebugMode = $debugMode === "TRUE" ? true : false;
+        $this->eventDebugMode = ( $debugMode === "TRUE" )
+            ? true : false ;
 
         // fetch the type of event
         $eventTypes = explode(':', $eventType);
