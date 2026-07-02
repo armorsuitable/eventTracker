@@ -1,6 +1,6 @@
 ## Event System Origins
 
-n modern web application systems, it's common for data produced by a business process to need to **"flow through"** the entire web system/API. This is often used for data collection, monitoring, distribution, and more — as well as for building associations with other systems (e.g., constructing a call chain to control other system features).
+In modern web application systems, it's common for data produced by a business process to need to **"flow through"** the entire web system/API. This is often used for data collection, monitoring, distribution, and more — as well as for building associations with other systems (e.g., constructing a call chain to control other system features).
 
 ## How the Event System Works
 
